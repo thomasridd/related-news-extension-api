@@ -57,15 +57,36 @@ const isYesterday = (millisecondDate) => {
 
 const combineData = (glitchedData, articles) => {
     const formattedArticles = articles;
+    const trust = combineTrustIndicators(glitchedData);
+
     articles = articles.map((article) => formatDisplayDate(article))
 
     return {
         "articles": articles,
+        "analysis": glitchedData["glitched"],
+        "warnings": trust.negative.length
     }
 }
 
-const combineTrust = (glitchedData) => {
+const combineTrustIndicators = (glitchedData) => {
+    var positive = [];
+    var negative = [];
+    glitchedData["content"]["trustIndicators"]["positive"].forEach((item) => positive.push(item));
+    glitchedData["content"]["trustIndicators"]["negative"].forEach((item) => negative.push(item));
 
+    glitchedData["text"]["trustIndicators"]["positive"].forEach((item) => positive.push(item));
+    glitchedData["text"]["trustIndicators"]["negative"].forEach((item) => negative.push(item));
+
+    glitchedData["blacklists"]["trustIndicators"]["positive"].forEach((item) => positive.push(item));
+    glitchedData["blacklists"]["trustIndicators"]["negative"].forEach((item) => negative.push(item));
+
+    glitchedData["related"]["trustIndicators"]["positive"].forEach((item) => positive.push(item));
+    glitchedData["related"]["trustIndicators"]["negative"].forEach((item) => negative.push(item));
+
+    glitchedData["factchecks"]["trustIndicators"]["positive"].forEach((item) => positive.push(item));
+    glitchedData["factchecks"]["trustIndicators"]["negative"].forEach((item) => negative.push(item));
+
+    return { 'positive': positive, 'negative': negative}
 }
 
 const filterNewsData = (fullData) => {
@@ -84,7 +105,9 @@ const getGlitched = async articleUrl => {
     const url = `https://glitched.news/api/article?url=${articleUrl}`
     try {
         const response = await fetch(url);
-        return await response.json();
+        const glitchedJson = await response.json();
+        glitchedJson["glitched"] = url
+        return glitchedJson
     } catch (error) {
         console.log(error);
         return {};
