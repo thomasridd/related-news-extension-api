@@ -3,6 +3,7 @@ const falsePositives = [
     "googleads",
     "robots.txt",
     "favicon.ico",
+    "window.location"
 ]
 
 const urlShouldBeIgnored = (url) => {
