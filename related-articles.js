@@ -1,6 +1,6 @@
 
 const fetch = require("node-fetch");
-
+const moment = require("moment");
 const urlIsPermitted = require("./allowed-domains");
 
 const getData = async url => {
@@ -33,9 +33,9 @@ const formattedDate = (publishedAt) => {
             return `${hourDiff} hours ago`
         }
     } else if(isYesterday(publishedAt)) {
-        return "yesterday"
+        return "yesterday";
     } else {
-        return
+        return moment(publishedAt).format('MMMM Do');
     }
 }
 const isToday = (millisecondDate) => {
@@ -102,11 +102,12 @@ const glitchedKeywords = (glitchedData) => {
 }
 
 const getGlitched = async articleUrl => {
-    const url = `https://glitched.news/api/article?url=${articleUrl}`
+    const url = `https://glitched.news/api/article?url=${articleUrl}`;
+    const glitched = `https://glitched.news/article?url=${articleUrl}`;
     try {
         const response = await fetch(url);
         const glitchedJson = await response.json();
-        glitchedJson["glitched"] = url
+        glitchedJson["glitched"] = glitched
         return glitchedJson
     } catch (error) {
         console.log(error);
