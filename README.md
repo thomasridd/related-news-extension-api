@@ -1,10 +1,10 @@
-# Related News api
+# Related News API
 
 This is a quickly built api created for the second [Hack the Press](https://hackthepress.org/) hackathon
 
-The api supports a Chrome extension that adds a "related news" sidebar to your chrome browser. The  
+The api supports a Chrome extension that adds a "related news" sidebar to your chrome browser.   
 
-
+https://github.com/qs/hackthepress
 
 ## Running Locally
 
