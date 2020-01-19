@@ -4,7 +4,7 @@ const moment = require("moment");
 const urlIsPermitted = require("./allowed-domains");
 
 const getData = async url => {
-    if(".google".indexOf(domain) > -1) {
+    if(url.indexOf(".google") > -1) {
         return emptyResponse(url);
     }
     const glitchedData = await getGlitched(url);
