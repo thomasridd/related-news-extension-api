@@ -2,9 +2,10 @@
 const fetch = require("node-fetch");
 const moment = require("moment");
 const urlIsPermitted = require("./allowed-domains");
+const shouldBeIgnored = require("./dont-bother");
 
 const getData = async url => {
-    if(url.indexOf(".google") > -1) {
+    if(shouldBeIgnored(url)) {
         return emptyResponse(url);
     }
     const glitchedData = await getGlitched(url);
@@ -101,6 +102,7 @@ const combineTrustIndicators = (glitchedData) => {
 }
 
 const filterNewsData = (fullData) => {
+    console.log(fullData);
     return fullData.articles.filter(item => urlIsPermitted(item.url))
 }
 
