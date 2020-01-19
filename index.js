@@ -5,7 +5,6 @@ const PORT = process.env.PORT || 5000
 
 const app = express();
 
-
 app.get('/', async (req, res) => {
     var q=req.query.q;
     try {
