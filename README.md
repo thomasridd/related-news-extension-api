@@ -1,12 +1,16 @@
-# node-js-getting-started
+# Related News api
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+This is a quickly built api created for the second [Hack the Press](https://hackthepress.org/) hackathon
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+The api supports a Chrome extension that adds a "related news" sidebar to your chrome browser. The  
+
+
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+This api expands on a boilerplate Node.js app using [Express 4](http://expressjs.com/).
+
+Make sure you have [Node.js](http://nodejs.org/) installed
 
 ```sh
 $ git clone https://github.com/heroku/node-js-getting-started.git # or clone your own fork
@@ -16,17 +20,6 @@ $ npm start
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## Documentation
 

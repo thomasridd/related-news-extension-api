@@ -4,6 +4,9 @@ const moment = require("moment");
 const urlIsPermitted = require("./allowed-domains");
 
 const getData = async url => {
+    if(".google".indexOf(domain) > -1) {
+        return emptyResponse(url);
+    }
     const glitchedData = await getGlitched(url);
     if(glitchedData) {
         const keywords = glitchedKeywords(glitchedData);
@@ -11,7 +14,7 @@ const getData = async url => {
         const relevantArticles = filterNewsData(newsApiData);
         return combineData(glitchedData, relevantArticles);
     }
-    return {}
+    return emptyResponse(url)
 };
 
 const formatDisplayDate = (article) => {
@@ -68,6 +71,14 @@ const combineData = (glitchedData, articles) => {
     }
 }
 
+const emptyResponse = (url) => {
+    return {
+        'articles':[],
+        'warnings':0,
+        'glitched': `https://glitched.news/article?url=${url}`
+    }
+}
+
 const combineTrustIndicators = (glitchedData) => {
     var positive = [];
     var negative = [];
@@ -111,7 +122,7 @@ const getGlitched = async articleUrl => {
         return glitchedJson
     } catch (error) {
         console.log(error);
-        return {};
+        return null;
     }
 };
 
